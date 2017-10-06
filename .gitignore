@@ -1,3 +1,7 @@
 /.idea
-/.target
 
+MyCinema.iml
+exit.jpg
+pom.xml
+src/test/
+target/
