@@ -4,6 +4,7 @@ import cinema.system.Movie;
 import cinema.system.presenter.MoviePresenter;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -20,10 +21,11 @@ public class DodajFilm {
     private JLabel duration;
     private JLabel director;
     private MoviePresenter moviePresenter;
-
+    private FirstPanel firstPanel;
 
     public DodajFilm() {
         moviePresenter = new MoviePresenter (null);
+        firstPanel= new FirstPanel();
         dodajFilmButton.addActionListener (new ActionListener () {
 
             @Override
@@ -34,6 +36,7 @@ public class DodajFilm {
                 film.setYear (LocalDate.parse (textYear.getText ()));
                 film.setDirector (textDirector.getText ());
                 moviePresenter.dodajFilmDoBazy (film);
+                firstPanel.wyświetlTekst("Dodano film do bazy");
             }
         });
     }

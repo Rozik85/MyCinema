@@ -1,6 +1,7 @@
 package gui;
 
 import cinema.system.Movie;
+import cinema.system.dao.MovieDAO;
 import cinema.system.presenter.MoviePresenter;
 
 import javax.swing.*;
@@ -19,16 +20,26 @@ public class FirstPanel {
     private JButton usunSeansButton;
     private JButton dodajSeansButton;
     private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
+    private JTextField date_timeTextField;
+    private JTextField movieIdTextField;
+    private JPanel wyswietlaczJPanel;
+    private JPanel dodawanieFilmuJPanel;
+    private JPanel dodawanieSeansuJPanel;
+    private JPanel przyciskiPanel;
+    private JButton wyświetlFilmyButton;
+    private JButton wyświetlSeanseButton;
+    private JTextArea textArea1;
+    private JTextField konsolaTextField;
+    private JButton czyśćWyświetlaczButton;
+    private JLabel wyswietlaczJLabel;
 
     private MoviePresenter moviePresenter;
 
 
     public FirstPanel() {
-        moviePresenter = new MoviePresenter (this);
+        moviePresenter = new MoviePresenter(this);
 
-        dodajFilmButton.addActionListener (new ActionListener () {
+        dodajFilmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -38,20 +49,45 @@ public class FirstPanel {
                 film.setYear(LocalDate.parse(rokProdukcjiTextField.getText()));
                 film.setDirector(reżyserTextField.getText());
                 moviePresenter.dodajFilmDoBazy(film);
+                wyświetlTekst("Dodano film:");
 
             }
         });
-        usunFilmButton.addActionListener (new ActionListener () {
+
+        usunFilmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Movie film = new Movie();
-                film.setMovie_id (Integer.valueOf (tytulTextField.getText ()));
-                moviePresenter.usunFilm (film);
+                film.setMovie_id(Integer.valueOf(konsolaTextField.getText()));
+                moviePresenter.usunFilm(film);
+                wyświetlTekst("Usunięto film o ID:"+konsolaTextField.getText());
+            }
+        });
+
+        wyświetlFilmyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                wyświetlTekst(String.valueOf(moviePresenter.pokażFilmyZBazy(Integer.valueOf(konsolaTextField.getText()))));
+            }
+        });
+        czyśćWyświetlaczButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea1.setText("");
             }
         });
     }
+
+    public void wyświetlTekst(String text ){
+        //dodaje tekst w kolejnych liniach
+        textArea1.append(text);
+        //wypisuje na czystej JtextArenie
+        // textArea1.setText(text);
+    }
+
     public JPanel getCinema() {
         return cinema;
     }
-
 }
+

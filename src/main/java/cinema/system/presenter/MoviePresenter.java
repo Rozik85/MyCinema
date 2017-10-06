@@ -8,13 +8,13 @@ import gui.FirstPanel;
 public class MoviePresenter {
     private final FirstPanel dodajFilmWidok;
 
-    private MovieDAO movieDAO = new MovieDAO ();
+    private MovieDAO movieDAO = new MovieDAO();
 
     public MoviePresenter(FirstPanel movieDetails) {
         this.dodajFilmWidok = movieDetails;
     }
 //    private DodajFilm dodajFilmWidok;
-  //  private FirsPanel wyświetlanieFilmów;
+    //  private FirsPanel wyświetlanieFilmów;
 
 //    public MoviePresenter(DodajFilm movieDetails) {
 //        this.dodajFilmWidok = movieDetails;
@@ -24,29 +24,32 @@ public class MoviePresenter {
 //        this.wyświetlanieFilmów = movieDetails;
 //    }
 
-    //    public void showMovie(Integer movieID) {
+    //        public void showMovie(Integer movieID) {
+//        Movie movieDetails = new Movie();
 //        Movie movie = movieDAO.getMovie(movieID);
 //        movieDetails.setMovieTitle(movie.getTitle());
 //        movieDetails.setMovieDirector(movie.getDirector());
 //        movieDetails.setMovieDuration("" + movie.getDuration());
+//
 //    }
     public void dodajFilmDoBazy(Movie movie) {
-        movieDAO.addMovie (movie);
+        movieDAO.addMovie(movie);
 
     }
 
-    public void pokażFilmyZBazy(Integer movieId) {
+    public Movie pokażFilmyZBazy(Integer movieId) {
 
-        Movie movieDetails = new Movie ();
-        Movie movie = movieDAO.getMovie (movieId);
-        movieDetails.setTitle (movie.getTitle ());
-        movieDetails.setYear (movie.getYear ());
-        movieDetails.setDuration (movie.getDuration ());
-        movieDetails.setDirector (movie.getDirector ());
+        Movie movieDetails = new Movie();
+        Movie movie = movieDAO.getMovie(movieId);
+        movieDetails.setTitle(movie.getTitle());
+        movieDetails.setYear(movie.getYear());
+        movieDetails.setDuration(movie.getDuration());
+        movieDetails.setDirector(movie.getDirector());
 
-
+        return movie;
     }
-    public void usunFilm (Movie movieId){
-        movieDAO.deleteMove (movieId);
+
+    public void usunFilm(Movie movieId) {
+        movieDAO.deleteMove(movieId);
     }
 }
