@@ -14,14 +14,22 @@ public class Seans {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int seans_id;
 
-    @Column (name= "movie_ID")
-    private int movie_id;
 
-    @Column (name = "date_time")
-    private LocalDateTime dateTime;
 
     @ManyToOne
-    @JoinColumn(name = "")
+    @JoinColumn(name = "movie_id", nullable = false)
+    private Movie movie;
+
+    @Column (name = "date_time")
+    private LocalDateTime date_time;
+
+
+    @Column (name = "nrSala", nullable = false)
+    private int nrSala;
+
+    public Seans() {
+
+    }
 
     public int getSeans_id() {
         return seans_id;
@@ -31,28 +39,37 @@ public class Seans {
         this.seans_id = seans_id;
     }
 
-    public int getMovie_id() {
-        return movie_id;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovie_id(int movie_id) {
-        this.movie_id = movie_id;
+    public void setMovie(Movie movie) {
+        this.movie = this.movie;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDateTime getDate_time() {
+        return date_time;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate_time(LocalDateTime date_time) {
+        this.date_time = date_time;
+    }
+
+    public int getNrSala() {
+        return nrSala;
+    }
+
+    public void setNrSala(int nrSala) {
+        this.nrSala = nrSala;
     }
 
     @Override
     public String toString() {
         return "Seans{" +
                 "seans_id=" + seans_id +
-                ", movie_id=" + movie_id +
-                ", dateTime=" + dateTime +
+                ", movie=" + movie +
+                ", date_time=" + date_time +
+                ", nrSala=" + nrSala +
                 '}';
     }
 }

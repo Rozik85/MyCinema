@@ -35,8 +35,9 @@ public class MoviePresenter {
     public void usunFilm(Movie movieId) {
         movieDAO.deleteMove(movieId);
     }
-    public void wyswietlWszystkieFilmy(){
-        dodajFilmWidok.setMovieList( movieDAO.getMovieList());
+
+    public void wyswietlWszystkieFilmy() {
+        dodajFilmWidok.setMovieList(movieDAO.getMovieList());
     }
 
-    }
+}

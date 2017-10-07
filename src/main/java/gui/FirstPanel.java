@@ -1,9 +1,12 @@
 package gui;
 
 import cinema.system.Movie;
+import cinema.system.Seans;
 import cinema.system.Util.MovieListModel;
 import cinema.system.dao.MovieDAO;
+import cinema.system.dao.SeansDAO;
 import cinema.system.presenter.MoviePresenter;
+import org.apache.log4j.helpers.DateTimeDateFormat;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -11,6 +14,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class FirstPanel {
@@ -23,7 +28,7 @@ public class FirstPanel {
     private JButton usunFilmButton;
     private JButton usunSeansButton;
     private JButton dodajSeansButton;
-    private JTextField textField1;
+    private JTextField numerSaliTextField;
     private JTextField date_timeTextField;
     private JTextField movieIdTextField;
     private JPanel wyswietlaczJPanel;
@@ -37,10 +42,12 @@ public class FirstPanel {
     private JButton czyśćWyświetlaczButton;
     private JList list1;
     private JPanel listJPanel;
+    private JScrollBar scrollBar1;
+    private JComboBox comboBox1;
     private JLabel wyswietlaczJLabel;
 
     private MoviePresenter moviePresenter;
-
+    private SeansDAO seansDAO;
 
     public FirstPanel() {
         moviePresenter = new MoviePresenter(this);
@@ -67,7 +74,7 @@ public class FirstPanel {
                 Movie film = new Movie();
                 film.setMovie_id(Integer.valueOf(konsolaTextField.getText()));
                 moviePresenter.usunFilm(film);
-                wyświetlTekst("\n Usunięto film o ID:"+konsolaTextField.getText());
+                wyświetlTekst("\n Usunięto film o ID:" + konsolaTextField.getText());
             }
         });
 
@@ -127,19 +134,44 @@ public class FirstPanel {
                 konsolaTextField.setText("");
             }
         });
-        init();
+
+        dodajSeansButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seansDAO = new SeansDAO();
+                Seans seans = new Seans();
+                Movie movie = (Movie) comboBox1.getSelectedItem();
+                seans.setMovie(movie);
+                DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                seans.setDate_time(LocalDateTime.parse(date_timeTextField.getText(), dateTimeFormat));
+                seans.setNrSala(Integer.valueOf(numerSaliTextField.getText()));
+
+                seansDAO.addSeans(seans);
+                wyświetlTekst("\nDodano seans:" + seans.getSeans_id());
+            }
+        });
+
+        initBox();
+        inity();
         moviePresenter.wyswietlWszystkieFilmy();
+
+
     }
 
-    public void     wyświetlTekst(String text ){
+    public void wyświetlTekst(String text) {
         //dodaje tekst w kolejnych liniach
-        textArea1.append("\n" +text);
+        textArea1.append("\n" + text);
         //wypisuje na czystej JtextArenie
         // textArea1.setText(text);
     }
 
+    private void initBox() {
+        MovieDAO movieDAO = new MovieDAO();
+        comboBox1.setModel(new ComboBox(movieDAO.getMovieList()));
+        comboBox1.setSelectedItem(ListSelectionModel.SINGLE_SELECTION);
+    }
 
-    private void init() {
+    private void inity() {
         list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list1.setCellRenderer(new ListCellRenderer<Movie>() {
             @Override
@@ -151,9 +183,7 @@ public class FirstPanel {
                 {
                     listItem.setBackground(list.getSelectionBackground());
                     listItem.setForeground(list.getSelectionForeground());
-                }
-                else
-                {
+                } else {
                     listItem.setBackground(list.getBackground());
                     listItem.setForeground(list.getForeground());
                 }
@@ -169,14 +199,20 @@ public class FirstPanel {
             public void valueChanged(ListSelectionEvent e) {
                 JList<Movie> movieList = (JList<Movie>) e.getSource();
                 Movie selectedMovie = movieList.getSelectedValue();
+                textArea1.setText("ID: " + selectedMovie.getMovie_id());
+                textArea1.append("\nTytuł: " + selectedMovie.getTitle());
+                textArea1.append("\nRok: " + selectedMovie.getYear().toString());
+                textArea1.append("\nDługość: " + selectedMovie.getDuration());
+                textArea1.append("\nReżyser: " + selectedMovie.getDirector());
 
-               // selectedMovie.setMovie_id();
             }
         });
     }
+
     public void setMovieList(List<Movie> movies) {
         list1.setModel(new MovieListModel(movies));
     }
+
     public JPanel getCinema() {
         return cinema;
     }
