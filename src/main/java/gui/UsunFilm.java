@@ -16,7 +16,7 @@ public class UsunFilm {
 
 
     public UsunFilm() {
-        MoviePresenter moviePresenter = new MoviePresenter (null);
+        moviePresenter = new MoviePresenter (null);
 
         usuńFilmButton.addActionListener (new ActionListener () {
             @Override

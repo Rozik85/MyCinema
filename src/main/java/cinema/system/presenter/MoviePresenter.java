@@ -6,6 +6,7 @@ import gui.DodajFilm;
 import gui.FirstPanel;
 
 public class MoviePresenter {
+    private Movie movieDetails;
     private final FirstPanel dodajFilmWidok;
 
     private MovieDAO movieDAO = new MovieDAO();
@@ -13,25 +14,7 @@ public class MoviePresenter {
     public MoviePresenter(FirstPanel movieDetails) {
         this.dodajFilmWidok = movieDetails;
     }
-//    private DodajFilm dodajFilmWidok;
-    //  private FirsPanel wyświetlanieFilmów;
 
-//    public MoviePresenter(DodajFilm movieDetails) {
-//        this.dodajFilmWidok = movieDetails;
-//    }
-//
-//    public MoviePresenter(FirsPanel movieDetails) {
-//        this.wyświetlanieFilmów = movieDetails;
-//    }
-
-    //        public void showMovie(Integer movieID) {
-//        Movie movieDetails = new Movie();
-//        Movie movie = movieDAO.getMovie(movieID);
-//        movieDetails.setMovieTitle(movie.getTitle());
-//        movieDetails.setMovieDirector(movie.getDirector());
-//        movieDetails.setMovieDuration("" + movie.getDuration());
-//
-//    }
     public void dodajFilmDoBazy(Movie movie) {
         movieDAO.addMovie(movie);
 
@@ -39,7 +22,7 @@ public class MoviePresenter {
 
     public Movie pokażFilmyZBazy(Integer movieId) {
 
-        Movie movieDetails = new Movie();
+        movieDetails = new Movie();
         Movie movie = movieDAO.getMovie(movieId);
         movieDetails.setTitle(movie.getTitle());
         movieDetails.setYear(movie.getYear());
@@ -52,4 +35,8 @@ public class MoviePresenter {
     public void usunFilm(Movie movieId) {
         movieDAO.deleteMove(movieId);
     }
-}
+    public void wyswietlWszystkieFilmy(){
+        dodajFilmWidok.setMovieList( movieDAO.getMovieList());
+    }
+
+    }

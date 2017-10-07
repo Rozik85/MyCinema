@@ -44,6 +44,12 @@ public class CinemaPanel extends JFrame {
         JMenuItem filmMenuItemWyswietl = new JMenuItem ("Wyświetl");
         filmMenuItemWyswietl.setMnemonic (KeyEvent.VK_W);
         filmMenuItemWyswietl.setToolTipText ("Wyświetl aplication");
+        filmMenuItemWyswietl.addActionListener ((ActionEvent)->{
+            JFrame wyswietlanieFilmu = new JFrame ("Wyświetl Film");
+            wyswietlanieFilmu.setContentPane (new WyswietlanieFilmu().getPanel1());
+            wyswietlanieFilmu.pack ();
+            wyswietlanieFilmu.setVisible (true);
+        });
 
         JMenuItem filmMenuItemDodaj = new JMenuItem ("Dodaj");
         filmMenuItemDodaj.setMnemonic (KeyEvent.VK_D);

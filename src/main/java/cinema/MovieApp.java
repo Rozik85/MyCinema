@@ -6,7 +6,7 @@ import cinema.system.dao.MovieDAO;
 import java.sql.Date;
 import java.time.LocalDate;
 
-public class MovieApp {
+public class  MovieApp {
     public static void main(String[] args) {
         MovieDAO movieDAO = new MovieDAO();
         Movie matrix = new Movie();
