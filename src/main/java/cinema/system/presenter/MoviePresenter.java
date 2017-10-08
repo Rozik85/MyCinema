@@ -2,7 +2,6 @@ package cinema.system.presenter;
 
 import cinema.system.Movie;
 import cinema.system.dao.MovieDAO;
-import gui.DodajFilm;
 import gui.FirstPanel;
 
 public class MoviePresenter {
@@ -39,5 +38,4 @@ public class MoviePresenter {
     public void wyswietlWszystkieFilmy() {
         dodajFilmWidok.setMovieList(movieDAO.getMovieList());
     }
-
 }

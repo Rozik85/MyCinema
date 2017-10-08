@@ -1,8 +1,6 @@
 package cinema.system;
 
 
-import org.apache.log4j.helpers.DateTimeDateFormat;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -27,10 +25,6 @@ public class Seans {
     @Column (name = "nrSala", nullable = false)
     private int nrSala;
 
-    public Seans() {
-
-    }
-
     public int getSeans_id() {
         return seans_id;
     }
@@ -44,7 +38,7 @@ public class Seans {
     }
 
     public void setMovie(Movie movie) {
-        this.movie = this.movie;
+        this.movie = movie;
     }
 
     public LocalDateTime getDate_time() {
@@ -65,11 +59,8 @@ public class Seans {
 
     @Override
     public String toString() {
-        return "Seans{" +
-                "seans_id=" + seans_id +
-                ", movie=" + movie +
-                ", date_time=" + date_time +
-                ", nrSala=" + nrSala +
-                '}';
+        return
+                movie.getTitle ()
+                ;
     }
 }

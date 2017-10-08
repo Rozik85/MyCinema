@@ -30,10 +30,6 @@ public class WyswietlanieFilmu {
 
     private void wyswietlaczTextArea(String hallo) {
         wyswietlaczTextArea.append(hallo);
-
-//      Movie film = new Movie();
-//        Movie movie = moviePresenter.getMovie(movieId);
-
     }
 
     public JPanel getPanel1() {

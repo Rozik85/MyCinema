@@ -14,8 +14,7 @@ public class Movie {
     private int movie_id;
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "movie",orphanRemoval = true)
-
-    @Column(name = "SEANS",nullable = false)
+    //@Column(name = "SEANS",nullable = false)
     private List<Seans> seans;
 
     @Column(name = "title")
@@ -80,13 +79,6 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" +
-                "movie_id=" + movie_id +
-                ", seans=" + seans +
-                ", title='" + title + '\'' +
-                ", year=" + year +
-                ", duration=" + duration +
-                ", director='" + director + '\'' +
-                '}';
+        return  title ;
     }
 }

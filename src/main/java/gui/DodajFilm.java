@@ -4,7 +4,6 @@ import cinema.system.Movie;
 import cinema.system.presenter.MoviePresenter;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;

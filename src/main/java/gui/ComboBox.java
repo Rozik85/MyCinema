@@ -4,7 +4,7 @@ import cinema.system.Movie;
 
 import javax.swing.*;
 import java.util.List;
-import java.util.Vector;
+
 
 public class ComboBox extends DefaultComboBoxModel<Movie>{
 

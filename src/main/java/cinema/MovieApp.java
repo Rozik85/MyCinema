@@ -3,7 +3,7 @@ package cinema;
 import cinema.system.Movie;
 import cinema.system.Util.HibernateUtil;
 import cinema.system.dao.MovieDAO;
-import java.sql.Date;
+
 import java.time.LocalDate;
 
 public class  MovieApp {
